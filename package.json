@@ -1,0 +1,14 @@
+{
+  "name": "ds.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:NickolasBenakis/ds.js.git",
+  "author": "nickolasBenakis <nickolasbenele@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": ""
+  },
+  "devDependencies": {
+    "prettier": "2.2.1"
+  }
+}
