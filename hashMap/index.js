@@ -64,7 +64,7 @@ class HashMap {
     if (!key.length) this._handleError('key');
 
     const hashKey = this._generateHashKey(key);
-    console.log(hashKey);
+
     if (this._isEmpty(hashKey)) {
       this._initializeStore({ hashKey, key, value });
     }
