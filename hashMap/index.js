@@ -95,8 +95,7 @@ class HashMap {
   }
 
   size() {
-    const filledKeys = this.values.flat().filter((el) => !!el);
-    return filledKeys.length;
+    return this.values.flat().filter((el) => !!el).length;
   }
 }
 
