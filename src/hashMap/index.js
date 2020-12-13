@@ -100,17 +100,3 @@ class HashMap {
 }
 
 export default HashMap;
-
-// const map = new HashMap();
-// console.log(map.set('name', 'zoro'));
-// console.log(map.set('d', 'collision-n'));
-// console.log(map.set('22', 'collision-22'));
-// console.log(map.set('23', 'collision-22'));
-
-// console.log(map.set('age', 27));
-
-// console.log(map.get('22'));
-// console.log(map.remove('name'));
-// console.log(map.get('name'));
-// console.log(map.set('name', 'zoro'));
-// console.log(map.size(), map);
