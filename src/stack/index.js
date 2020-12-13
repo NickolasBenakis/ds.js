@@ -21,6 +21,10 @@ class Stack {
   peek() {
     return this.#stack[this.#stack.length - 1];
   }
+
+  isEmpty() {
+    return !!!this.#stack.length;
+  }
 }
 
 export default Stack;
