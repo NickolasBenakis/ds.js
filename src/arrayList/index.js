@@ -36,17 +36,15 @@ class ArrayList {
   }
 
   #swapIndeces(list, index) {
-    if ((index + 1).toString() in list) {
-      delete this.#list[index];
-      this.#list = Object.entries(list)
-        .map((key, i) => {
-          return [i, key[1]];
-        })
-        .reduce((acc, current) => {
-          return { ...acc, [current[0]]: current[1] };
-        }, {});
-      return;
-    }
+    delete this.#list[index];
+    this.#list = Object.entries(list)
+      .map((key, i) => {
+        return [i, key[1]];
+      })
+      .reduce((acc, current) => {
+        return { ...acc, [current[0]]: current[1] };
+      }, {});
+    return;
   }
 }
 
