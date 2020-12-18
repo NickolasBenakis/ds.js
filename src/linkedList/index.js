@@ -74,14 +74,47 @@ class LinkedList {
     if (this.length === 1) {
       return this.getHead();
     }
-    return this.#traverseNodes(value, false, this.head);
+    return this.#traverseNodes(value, this.head, false);
+  }
+
+  pop() {
+    if (this.length === 0) {
+      throw new Error("can't pop an element from empty list");
+    }
+
+    const previousTail = this.tail;
+    const preTail = this.#getPreTail();
+    preTail.next = null;
+    this.tail = preTail;
+    this.length--;
+
+    return previousTail.value;
   }
 
   size() {
     return this.length;
   }
 
-  #traverseNodes(value, found, node) {
+  #getPreTail() {
+    if (this.length === 1) return this.tail;
+    if (this.length === 2) return this.head;
+
+    let pointer = this.head;
+    let found = false;
+    while (!found) {
+      if (pointer?.next?.next == null) {
+        found = true;
+      } else {
+        const nextNode = pointer.next;
+        pointer = nextNode;
+      }
+    }
+    return found
+      ? pointer
+      : new Error("can't get a preTail from an empty list");
+  }
+
+  #traverseNodes(value, node, found) {
     if (found) return node.value;
 
     found = node.value === value;
@@ -92,7 +125,7 @@ class LinkedList {
       node = nextNode;
     }
 
-    return this.#traverseNodes(value, found, node);
+    return this.#traverseNodes(value, node, found);
   }
 
   #createNewNode(value) {

@@ -55,4 +55,21 @@ describe('LinkedList', () => {
     expect(list._get(1)).toEqual(1);
     expect(list._get(10)).toEqual(10);
   });
+
+  it('pops last element', () => {
+    const list = new LinkedList();
+    [...new Array(3).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+
+    expect(list.pop()).toEqual(3);
+    expect(list.getTail()).toEqual(2);
+    expect(list.pop()).toEqual(2);
+    expect(list.getTail()).toEqual(1);
+    expect(list.pop()).toEqual(1);
+    expect(list.length).toEqual(0);
+    expect(() => list.pop()).toThrow(
+      new Error("can't pop an element from empty list")
+    );
+  });
 });
