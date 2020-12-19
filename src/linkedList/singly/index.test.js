@@ -4,6 +4,7 @@ describe('LinkedList', () => {
   it('creates an instance', () => {
     const list = new LinkedList();
     expect(list).toBeInstanceOf(LinkedList);
+    expect(list).toMatchSnapshot();
   });
 
   it('addsTo new elements', () => {
@@ -128,5 +129,22 @@ describe('LinkedList', () => {
     expect(list.size()).toEqual(9);
 
     expect(() => list.delete(-1)).toThrow(new Error('negative index'));
+  });
+
+  it('is a linked list', () => {
+    const list = new LinkedList();
+    [...new Array(4).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+    expect(list).toMatchSnapshot();
+  });
+
+  it('reverse a linked list', () => {
+    const list = new LinkedList();
+    [...new Array(4).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+    expect(list.size()).toEqual(4);
+    expect(list.reverse()).toMatchSnapshot();
   });
 });

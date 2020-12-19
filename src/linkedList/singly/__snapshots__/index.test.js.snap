@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkedList creates an instance 1`] = `
+LinkedList {
+  "head": null,
+  "length": 0,
+  "tail": null,
+}
+`;
+
+exports[`LinkedList is a linked list 1`] = `
+LinkedList {
+  "head": Node {
+    "next": Node {
+      "next": Node {
+        "next": Node {
+          "next": null,
+          "value": 4,
+        },
+        "value": 3,
+      },
+      "value": 2,
+    },
+    "value": 1,
+  },
+  "length": 4,
+  "tail": Node {
+    "next": null,
+    "value": 4,
+  },
+}
+`;
+
+exports[`LinkedList reverse a linked list 1`] = `
+LinkedList {
+  "head": Node {
+    "next": null,
+    "value": 1,
+  },
+  "length": 4,
+  "tail": Node {
+    "next": Node {
+      "next": Node {
+        "next": Node {
+          "next": null,
+          "value": 1,
+        },
+        "value": 2,
+      },
+      "value": 3,
+    },
+    "value": 4,
+  },
+}
+`;

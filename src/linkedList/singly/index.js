@@ -182,6 +182,19 @@ class LinkedList {
       : new Error("can't get a preTail from an empty list");
   }
 
+  reverse() {
+    let head = this.head;
+    let prev = null;
+    let next = null;
+    while (head !== null) {
+      next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+    return this;
+  }
+
   #find(value, node, found) {
     if (found) return node;
 
