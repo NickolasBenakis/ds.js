@@ -1,3 +1,10 @@
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
 class LinkedList {
   constructor() {
     this.head = this.tail = null;
@@ -5,7 +12,7 @@ class LinkedList {
   }
 
   prepend(value) {
-    const node = this.#createNewNode(value);
+    const node = new Node(value);
 
     this.length++;
 
@@ -20,7 +27,7 @@ class LinkedList {
   }
 
   append(value) {
-    const node = this.#createNewNode(value);
+    const node = new Node(value);
 
     this.length++;
 
@@ -30,6 +37,22 @@ class LinkedList {
       this.tail.next = node;
       this.tail = node;
     }
+
+    return this;
+  }
+
+  addTo(index, value) {
+    if (index > this.length) throw new Error('higher than length');
+    if (index < 0) throw new Error('negative index');
+    if (index === 0) return this.prepend(value);
+    if (index === this.length) return this.append(value);
+
+    const node = new Node(value);
+
+    const previousNode = this.#findByIndex(index - 1);
+    const next = previousNode.next;
+    previousNode.next = node;
+    node.next = next;
 
     return this;
   }
@@ -63,7 +86,7 @@ class LinkedList {
         pointer = nextNode;
       }
     }
-    return found ? pointer.value : undefined;
+    return found ? pointer?.value : undefined;
   }
 
   /** This get is implemented with recursion */
@@ -74,7 +97,7 @@ class LinkedList {
     if (this.length === 1) {
       return this.getHead();
     }
-    return this.#traverseNodes(value, this.head, false);
+    return this.#find(value, this.head, false)?.value;
   }
 
   getAt(index) {
@@ -84,7 +107,7 @@ class LinkedList {
     if (index === 0) return this.head.value;
     if (index === this.length) return this.tail.value;
 
-    return this.#traverseNodesByIndex(index).value;
+    return this.#findByIndex(index)?.value;
   }
 
   shift() {
@@ -126,9 +149,10 @@ class LinkedList {
       return this.pop();
     }
 
-    const prevNode = this.#traverseNodesByIndex(index - 1);
+    const prevNode = this.#findByIndex(index - 1);
     const nextRef = prevNode.next.next;
     prevNode.next = nextRef;
+    this.length--;
     return prevNode.next.value;
   }
 
@@ -155,8 +179,8 @@ class LinkedList {
       : new Error("can't get a preTail from an empty list");
   }
 
-  #traverseNodes(value, node, found) {
-    if (found) return node.value;
+  #find(value, node, found) {
+    if (found) return node;
 
     found = node.value === value;
 
@@ -166,10 +190,10 @@ class LinkedList {
       node = nextNode;
     }
 
-    return this.#traverseNodes(value, node, found);
+    return this.#find(value, node, found);
   }
 
-  #traverseNodesByIndex(index) {
+  #findByIndex(index) {
     let counter = 0;
     let pointer = this.head;
     let found = false;
@@ -183,13 +207,6 @@ class LinkedList {
       }
     }
     return found ? pointer : undefined;
-  }
-
-  #createNewNode(value) {
-    return {
-      value,
-      next: null,
-    };
   }
 }
 

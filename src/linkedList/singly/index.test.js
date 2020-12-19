@@ -6,6 +6,19 @@ describe('LinkedList', () => {
     expect(list).toBeInstanceOf(LinkedList);
   });
 
+  it('addsTo new elements', () => {
+    const list = new LinkedList();
+    list.addTo(0, 'test');
+    expect(list.head.value).toEqual('test');
+    expect(list.tail.value).toEqual('test');
+    expect(() => list.addTo(2, 'test')).toThrow(
+      new Error('higher than length')
+    );
+    list.addTo(1, 'test2');
+    expect(list.head.value).toEqual('test');
+    expect(list.tail.value).toEqual('test2');
+  });
+
   it('appends new elements', () => {
     const list = new LinkedList();
     list.append(1);
@@ -109,8 +122,10 @@ describe('LinkedList', () => {
     [...new Array(10).fill()].forEach((item, index) => {
       list.append(index + 1);
     });
+    expect(list.size()).toEqual(10);
 
     expect(list.delete(0)).toEqual(1);
+    expect(list.size()).toEqual(9);
 
     expect(() => list.delete(-1)).toThrow(new Error('negative index'));
   });
