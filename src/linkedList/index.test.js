@@ -56,6 +56,20 @@ describe('LinkedList', () => {
     expect(list._get(10)).toEqual(10);
   });
 
+  it('getAt specific index', () => {
+    const list = new LinkedList();
+    [...new Array(10).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+
+    expect(list.getAt(0)).toEqual(1);
+    expect(list.getAt(1)).toEqual(2);
+    expect(list.getAt(2)).toEqual(3);
+
+    expect(list.getAt(10)).toEqual(10);
+    expect(() => list.getAt(11)).toThrow(new Error('higher than length'));
+  });
+
   it('pops last element', () => {
     const list = new LinkedList();
     [...new Array(3).fill()].forEach((item, index) => {
@@ -71,5 +85,33 @@ describe('LinkedList', () => {
     expect(() => list.pop()).toThrow(
       new Error("can't pop an element from empty list")
     );
+  });
+
+  it('shifts first element', () => {
+    const list = new LinkedList();
+    [...new Array(3).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+
+    expect(list.shift()).toEqual(1);
+    expect(list.getHead()).toEqual(2);
+    expect(list.shift()).toEqual(2);
+    expect(list.getHead()).toEqual(3);
+    expect(list.shift()).toEqual(3);
+    expect(list.length).toEqual(0);
+    expect(() => list.pop()).toThrow(
+      new Error("can't pop an element from empty list")
+    );
+  });
+
+  it('deletes element at index', () => {
+    const list = new LinkedList();
+    [...new Array(10).fill()].forEach((item, index) => {
+      list.append(index + 1);
+    });
+
+    expect(list.delete(0)).toEqual(1);
+
+    expect(() => list.delete(-1)).toThrow(new Error('negative index'));
   });
 });

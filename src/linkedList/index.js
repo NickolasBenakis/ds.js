@@ -69,12 +69,35 @@ class LinkedList {
   /** This get is implemented with recursion */
 
   get(value) {
-    if (!this.head) throw new Error('no elements initialized');
+    if (!this.length) throw new Error('no elements initialized');
 
     if (this.length === 1) {
       return this.getHead();
     }
     return this.#traverseNodes(value, this.head, false);
+  }
+
+  getAt(index) {
+    if (!this.length) throw new Error('no elements initialized');
+    if (index > this.length) throw new Error('higher than length');
+
+    if (index === 0) return this.head.value;
+    if (index === this.length) return this.tail.value;
+
+    return this.#traverseNodesByIndex(index).value;
+  }
+
+  shift() {
+    if (this.length === 0) {
+      throw new Error("can't pop an element from empty list");
+    }
+
+    const previousHead = this.head;
+    const nextHead = this.head.next;
+    this.head = nextHead;
+    this.length--;
+
+    return previousHead.value;
   }
 
   pop() {
@@ -89,6 +112,24 @@ class LinkedList {
     this.length--;
 
     return previousTail.value;
+  }
+
+  delete(index) {
+    if (!this.length) throw new Error('no elements initialized');
+    if (index > this.length) throw new Error('higher than length');
+    if (index < 0) throw new Error('negative index');
+
+    if (index === 0) {
+      return this.shift();
+    }
+    if (index === this.length) {
+      return this.pop();
+    }
+
+    const prevNode = this.#traverseNodesByIndex(index - 1);
+    const nextRef = prevNode.next.next;
+    prevNode.next = nextRef;
+    return prevNode.next.value;
   }
 
   size() {
@@ -126,6 +167,22 @@ class LinkedList {
     }
 
     return this.#traverseNodes(value, node, found);
+  }
+
+  #traverseNodesByIndex(index) {
+    let counter = 0;
+    let pointer = this.head;
+    let found = false;
+    while (!found) {
+      if (counter === index) {
+        found = true;
+      } else {
+        let nextPointer = pointer.next;
+        pointer = nextPointer;
+        counter++;
+      }
+    }
+    return found ? pointer : undefined;
   }
 
   #createNewNode(value) {
