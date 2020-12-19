@@ -50,9 +50,12 @@ class LinkedList {
     const node = new Node(value);
 
     const previousNode = this.#findByIndex(index - 1);
-    const next = previousNode.next;
-    previousNode.next = node;
-    node.next = next;
+    if (previousNode) {
+      const next = previousNode.next;
+      previousNode.next = node;
+      node.next = next;
+      this.length++;
+    }
 
     return this;
   }
