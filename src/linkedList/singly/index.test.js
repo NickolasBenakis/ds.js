@@ -131,20 +131,20 @@ describe('LinkedList', () => {
     expect(() => list.delete(-1)).toThrow(new Error('negative index'));
   });
 
-  it('is a linked list', () => {
-    const list = new LinkedList();
-    [...new Array(4).fill()].forEach((item, index) => {
-      list.append(index + 1);
-    });
-    expect(list).toMatchSnapshot();
-  });
-
   it('reverse a linked list', () => {
     const list = new LinkedList();
     [...new Array(4).fill()].forEach((item, index) => {
       list.append(index + 1);
     });
     expect(list.size()).toEqual(4);
+
+    expect(list.head.next).not.toEqual(null);
+    expect(list.tail.next).toEqual(null);
+    list.reverse();
+
+    expect(list.head.next).toEqual(null);
+    expect(list.tail.next).not.toEqual(null);
+
     expect(list.reverse()).toMatchSnapshot();
   });
 });

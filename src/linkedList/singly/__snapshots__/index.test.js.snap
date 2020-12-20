@@ -8,29 +8,6 @@ LinkedList {
 }
 `;
 
-exports[`LinkedList is a linked list 1`] = `
-LinkedList {
-  "head": Node {
-    "next": Node {
-      "next": Node {
-        "next": Node {
-          "next": null,
-          "value": 4,
-        },
-        "value": 3,
-      },
-      "value": 2,
-    },
-    "value": 1,
-  },
-  "length": 4,
-  "tail": Node {
-    "next": null,
-    "value": 4,
-  },
-}
-`;
-
 exports[`LinkedList reverse a linked list 1`] = `
 LinkedList {
   "head": Node {
