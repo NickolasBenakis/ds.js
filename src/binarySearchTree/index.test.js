@@ -9,6 +9,7 @@ describe('BST', () => {
   it('creates a BST with root', () => {
     const bst = new BST(10);
     expect(bst.root.value).toEqual(10);
+    expect(bst.depth).toEqual(0);
   });
 
   it('adds nodes to BST', () => {
@@ -18,6 +19,20 @@ describe('BST', () => {
     expect(bst.root.left.value).toEqual(5);
     expect(bst.root.right.value).toEqual(12);
     bst.add(7);
+    bst.add(4);
+
     expect(bst.root.left.right.value).toEqual(7);
+  });
+
+  it('calculates the depth of BST', () => {
+    const bst = new BST(10);
+    expect(bst.depth).toEqual(0);
+    bst.add(5);
+    expect(bst.depth).toEqual(1);
+    bst.add(12);
+    bst.add(7);
+    expect(bst.depth).toEqual(2);
+    bst.add(3);
+    expect(bst.depth).toEqual(2);
   });
 });
