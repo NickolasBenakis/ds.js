@@ -14,6 +14,11 @@ class BST {
 
   add(value) {
     const node = new Node(value);
+    if (this.root.value == null) {
+      this.root = node;
+      return this.root;
+    }
+
     const { newNode, count } = this.#traverseToAdd(this.root, node, 0);
     this.depth = count;
     return newNode;
