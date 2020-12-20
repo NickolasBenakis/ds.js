@@ -7,7 +7,7 @@ class Node {
 }
 
 class BST {
-  constructor(value) {
+  constructor(value = null) {
     this.root = new Node(value);
     this.depth = 0;
   }
