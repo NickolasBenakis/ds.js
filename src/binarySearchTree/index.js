@@ -29,8 +29,15 @@ class BST {
   }
 
   delete(value) {
-    const parent = this.#traverseToDelete(value);
-    if (!parent) return undefined;
+    const { node, parent } = this.#traverseToDelete(value) || {};
+    if (!parent || !node) return undefined;
+
+    // todo: reconstruct child nodes
+    // if has children
+    // then the right ones should be parents
+    // for the left ones until there is no right.
+    
+
 
     if (parent.right.value === value) {
       parent.right = null;
@@ -58,7 +65,7 @@ class BST {
         return this.#traverseToDelete(value, pointer.left, pointer);
       }
     } else {
-      return parent;
+      return { node: pointer, parent };
     }
   }
 
