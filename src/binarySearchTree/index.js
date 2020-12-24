@@ -25,11 +25,41 @@ class BST {
   }
 
   get(value) {
-    return this.#traverseToGet(value);
+    return this.#traverseToGet(value)?.value;
+  }
+
+  delete(value) {
+    const parent = this.#traverseToDelete(value);
+    if (!parent) return undefined;
+
+    if (parent.right.value === value) {
+      parent.right = null;
+    } else {
+      parent.left = null;
+    }
+    return value;
   }
 
   #updateTreeDepth(count) {
     this.depth = count;
+  }
+
+  #traverseToDelete(value, pointer = this.root, parent = null) {
+    if (value > pointer.value) {
+      if (!pointer.right) {
+        return undefined;
+      } else {
+        return this.#traverseToDelete(value, pointer.right, pointer);
+      }
+    } else if (value < pointer.value) {
+      if (!pointer.left) {
+        return undefined;
+      } else {
+        return this.#traverseToDelete(value, pointer.left, pointer);
+      }
+    } else {
+      return parent;
+    }
   }
 
   #traverseToGet(value, pointer = this.root) {
@@ -46,7 +76,7 @@ class BST {
         return this.#traverseToGet(value, pointer.left);
       }
     } else {
-      return pointer.value;
+      return pointer;
     }
   }
 

@@ -44,4 +44,15 @@ describe('BST', () => {
     expect(bst.get(7)).toEqual(7);
     expect(bst.get(11)).toEqual(undefined);
   });
+
+  it('deletes nodes from BST', () => {
+    const bst = new BST(10);
+    bst.add(5);
+    bst.add(12);
+    bst.add(7);
+    bst.delete(7);
+    expect(bst.delete(5)).toEqual(5);
+    expect(bst.get(7)).toEqual(undefined);
+    expect(bst.get(5)).toEqual(undefined);
+  });
 });
