@@ -35,4 +35,13 @@ describe('BST', () => {
     bst.add(3);
     expect(bst.depth).toEqual(2);
   });
+
+  it('gets nodes from BST', () => {
+    const bst = new BST(10);
+    bst.add(5);
+    bst.add(12);
+    bst.add(7);
+    expect(bst.get(7)).toEqual(7);
+    expect(bst.get(11)).toEqual(undefined);
+  });
 });

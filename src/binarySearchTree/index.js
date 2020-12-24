@@ -19,12 +19,43 @@ class BST {
       return this.root;
     }
 
-    const { newNode, count } = this.#traverseToAdd(this.root, node, 0);
-    this.depth = count;
+    const { newNode, count } = this.#traverseToAdd(this.root, node);
+    this.#updateTreeDepth(count);
     return newNode;
   }
 
-  #traverseToAdd(pointer, newNode, count) {
+  get(value) {
+    return this.#traverseToGet(value);
+  }
+
+  #updateTreeDepth(count) {
+    this.depth = count;
+  }
+
+  #traverseToGet(value, pointer = this.root) {
+    if (value > pointer.value) {
+      if (!pointer.right) {
+        return undefined;
+      } else {
+        return this.#traverseToGet(value, pointer.right);
+      }
+    } else if (value < pointer.value) {
+      if (!pointer.left) {
+        return undefined;
+      } else {
+        return this.#traverseToGet(value, pointer.left);
+      }
+    } else {
+      return pointer.value;
+    }
+  }
+
+  /**
+   * pointer : points to the origin node
+   * newNode: is the newNode that has to be added
+   * count: counts the tree level depth
+   */
+  #traverseToAdd(pointer, newNode, count = 0) {
     if (newNode.value > pointer.value) {
       if (!pointer.right) {
         pointer.right = newNode;
