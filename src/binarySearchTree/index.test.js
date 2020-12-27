@@ -45,14 +45,21 @@ describe('BST', () => {
     expect(bst.get(11)).toEqual(undefined);
   });
 
-  it('deletes nodes from BST', () => {
-    const bst = new BST(10);
-    bst.add(5);
-    bst.add(12);
-    bst.add(7);
-    bst.delete(7);
-    expect(bst.delete(5)).toEqual(5);
-    expect(bst.get(7)).toEqual(undefined);
-    expect(bst.get(5)).toEqual(undefined);
+  it('deletes node with children from BST', () => {
+    const bst = new BST(20);
+    bst.add(22);
+    bst.add(10);
+    bst.add(14);
+    bst.add(13);
+    bst.add(16);
+    bst.add(15);
+    bst.add(17);
+
+    bst.delete(14);
+    const replacedNode = bst.root.left.right;
+
+    expect(replacedNode.value).toEqual(15);
+    expect(replacedNode.left.value).toEqual(13);
+    expect(replacedNode.right.value).toEqual(16);
   });
 });
